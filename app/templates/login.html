@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h1 align="center">LOGIN</h1><br>
+
+<header>
+    <form action="{{url_for('login')}}" class="form-control mb-3" method="post">
+        <div>
+            <select name="database" class="select-box">
+            {% for data in databases %}
+                <option value="{{data}}">{{data}}</option>
+            {% endfor %}
+            </select>
+        </div><br>
+
+        <div class="form-floating mb-4 col-2">
+            <input type="usuario" class="form-control" id="floatingInput" placeholder="Username" name="user">
+            <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating mb-4 col-2">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="pass">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <div class="row col-2">
+            <button class="btn btn-primary">Entrar</button>
+        </div>
+          
+    </form>
+</header>
+{%- for mensagem in get_flashed_messages() %}
+    <div class="alert alert-danger" align="center">
+        {{mensagem}}
+    </div>
+{%- endfor %}
+
+{% endblock conteudo %}

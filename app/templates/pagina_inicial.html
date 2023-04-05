@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Conheça o Produto</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Sobre nós
+            </a>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="https://wa.me/+5562992077641">Whatsapp</a></li>
+              <li><a class="dropdown-item" href="https://github.com/jauumgod">Github</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="https://www.linkedin.com/in/joao-marcos-duarte-marinho-206b35227/">Linkedin</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Agendar Demonstração</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('login')}}">Entrar</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+</nav>
+<br><br>
+<div>
+    <H2>logo + nome</H2>
+</div>
+<header>
+    <h3>Conheça o produto</h3>
+    <p>Software de gerenciamento de suporte Remoto é presencial!</p>
+    <p>Qualidade e Agilidade em um só Lugar!</p>
+    <p>Solução para manutenção voltada para os seus negocios</p>
+</header>
+
+<div>
+    <ul>
+        <li>Gerenciamento de acessos</li>
+        <li>Gerenciamento de estoque</li>
+        <li>Suporte Agil é Rapido</li>
+        <li>Mobilidade</li>
+    </ul>
+</div>
+<div>
+    <p>Com Análise de Informações, gráficos inteligentes</p>
+    <button class="btn btn-primary mb-2 col-2" type="submit">Agendar</button>
+</div>
+<br>
+<div class="container-icons">
+    <h2>ICONS</h2>
+    <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+        <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/></svg></a>
+
+    <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-briefcase-fill" viewBox="0 0 16 16">
+        <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/>
+        <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/></svg></a>
+
+    <a href="">        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+        <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5z"/></svg></a>
+
+    <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/></svg></a>
+    
+    <p>Pessoas</p>
+</div>
+
+<div>
+    <p>Esta ferramenta é a melhor solução para diversas àreas</p>
+</div>
+
+<div align="center" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{{url_for('static', filename='img1.jpg')}}" class="d-block w-50 col-2" alt="comment1">
+      </div>
+      <div class="carousel-item">
+        <img src="{{url_for('static', filename='img2.jpg')}}" class="d-block w-50 col-2" alt="comment2">
+      </div>
+      <div class="carousel-item">
+        <img src="{{url_for('static', filename='img3.jpg')}}" class="d-block w-50 col-2" alt="comment3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div>
+    <p>Hospedagem na AWS</p>
+    <p>Otima conexão</p>
+</div>
+<div>
+    <div class="card" align="center">
+        <h5 class="card-header">TUTORIAIS</h5>
+        <div class="card-body">
+          <h5 class="card-title">PRIMEIRA AULA NO YOUTUBE</h5>
+          <p class="card-text">Com a mais alta qualidade de ensino e com aprendizado simplificado.</p>
+          <a href="#" class="btn btn-primary">Vamos lá!</a>
+        </div>
+    </div>
+
+</div>
+
+<footer class="bottom" align="center">
+    <div class="legal">
+        <span>Copyright 2023 © JMND1. Todos os direitos reservados.</span>
+        <p>Fale conosco</p>
+
+        <a href="#"> MIT License</a>
+    </div>
+    <div class="links">
+        <a  class=" fa-brands fa-github"></a>
+        <a  class=" fa-brands fa-linkedin"></a>
+        <a  class=" fa-brands fa-whatsapp"></a>
+    </div>
+</footer>
+{% endblock conteudo %}

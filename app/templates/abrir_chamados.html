@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">JM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url_for('chamados_usuario')}}">INICIO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('chamados_usuario')}}">Meus Chamados</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Mais
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Suporte</a></li>
+              <li><a class="dropdown-item" href="#">Sobre</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Sair</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+<br>
+<h1 align="center">DESCREVA O CHAMADO</h1><br>
+
+<header>
+    <form action="{{url_for('login')}}" class="form-control mb-3" method="post">
+
+        <div class="form-floating mb-2 col-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Titulo" name="title">
+            <label for="floatingInput">Titulo</label>
+        </div>
+        <p>TIPO DO PROBLEMA: </p>
+        <select name="" id="">
+            <option value="AUTOMACAO">AUTOMAÇÃO</option>
+            <option value="PDV">PDV</option>
+            <option value="SERVIDOR">SERVIDOR</option>
+            <option value="CAMERAS">CAMERAS</option>
+        </select><br>
+        <div class="form-floating mb-2 col-4">
+            <input type="text" class="form-control" id="floatingInput" placeholder="descricao" name="descricao">
+            <label for="floatingInput">Descrição</label>
+        </div>
+        Data:
+            <input type="date"><br>
+
+        <div class="row col-2">
+            <button class="btn btn-primary">Abrir</button>
+        </div>
+          
+    </form>
+</header>
+{% endblock conteudo %}
