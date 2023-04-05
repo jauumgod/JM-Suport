@@ -34,30 +34,26 @@
 <h1 align="center">DESCREVA O CHAMADO</h1><br>
 
 <header>
-    <form action="{{url_for('login')}}" class="form-control mb-3" method="post">
-
-        <div class="form-floating mb-2 col-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Titulo" name="title">
-            <label for="floatingInput">Titulo</label>
-        </div>
+    <form action="{{url_for('abrir_chamado')}}" class="form-control mb-3" method="POST">
         <p>TIPO DO PROBLEMA: </p>
-        <select name="" id="">
+        <select name="select_type">
             <option value="AUTOMACAO">AUTOMAÇÃO</option>
             <option value="PDV">PDV</option>
             <option value="SERVIDOR">SERVIDOR</option>
             <option value="CAMERAS">CAMERAS</option>
         </select><br>
         <div class="form-floating mb-2 col-4">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Titulo" name="title">
+            <label for="floatingInput">Titulo</label>
+        </div>
+
+        <div class="form-floating mb-2 col-4">
             <input type="text" class="form-control" id="floatingInput" placeholder="descricao" name="descricao">
             <label for="floatingInput">Descrição</label>
         </div>
-        Data:
-            <input type="date"><br>
-
         <div class="row col-2">
             <button class="btn btn-primary">Abrir</button>
-        </div>
-          
+        </div>  
     </form>
 </header>
 {% endblock conteudo %}

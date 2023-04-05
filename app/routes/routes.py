@@ -3,9 +3,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from ..models.tab_usuarios import Usuarios
 from ..models.tab_chamados import Chamados
 from ..models.tab_estoque import Estoque
-from flask_login import login_manager, login_required, logout_user
+from flask_login import login_manager, login_required, logout_user, login_user, current_user
 import datetime
 import time
+
+
 
 
 @app.route("/")
@@ -26,9 +28,14 @@ def login():
             flash("Usuario ou senha incorretos")
             return redirect(url_for("login"))
         
+        login_user(consulta,True)        
         return redirect(url_for("chamados_usuario"))
     
     return render_template("login.html", databases=databases)
+
+@login_manager.user_loader
+def load_user(id):
+    return Usuarios.query.get(int(id))
 
 ROWS_PER_PAGE = 5
 @app.route("/chamados_suporte")
@@ -37,14 +44,14 @@ def chamados_suporte():
     ch = Chamados.query.paginate(page=page, per_page=ROWS_PER_PAGE)
     return render_template("chamados_suporte.html", ch = ch)
 
-@app.route("/chamados_suporte", methods=['GET', 'POST'])
+@app.route("/fechar_chamado", methods=['GET', 'POST'])
 def fechar_chamado():
     situacao = 'fechado'
     db.update(situacao)
     db.commit()
 
-@app.route("/chamados_suporte", methods=['GET','POST'])
-def ch_in_process():
+@app.route("/processamento", methods=['GET','POST'])
+def processamento():
     chamado = Chamados.query.filter_by(id=id)
     chamado.situacao = 'processamento'
     db.update(chamado.situacao)
@@ -59,12 +66,22 @@ def chamados_usuario():
 
 @app.route("/abrir_chamados", methods=['GET','POST'])
 def abrir_chamado():
-    # title = request.form['title']
-    # text = request.form['text']
-    # nome_usr = "usuario_logado"
-    # data_add = datetime.today()
-    # tipo_ch = request.form['select_type']
-    # situacao = "Aberto"
+    if request.method == 'POST':
+        ch = Chamados()
+        ch.titulo = request.form['title']
+        ch.descricao = request.form['descricao']
+        ch.nome_usr =  current_user()    
+        ch.data_add = datetime.today()
+        ch.tipo_ch = request.form['select_type']
+        ch.data_fim = "algum dia"
+        ch.situacao = "Aberto"
+        
+        db.session.add(ch)
+        db.session.commit()
+        return redirect(url_for("chamados_usuario"))
+    else:
+        flash("não foi possivel abrir o chamado")
+        
     return render_template("abrir_chamados.html")
 
 @app.route("/espera")

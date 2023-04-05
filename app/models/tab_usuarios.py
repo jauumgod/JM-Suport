@@ -10,3 +10,6 @@ class Usuarios(db.Model):
     email = db.Column(db.String(255), nullable=False)
     is_active = db.Column(db.String(10), nullable=False)
     permiss = db.Column(db.String(100), nullable=False)
+
+    def is_active(self):
+        return self.active
