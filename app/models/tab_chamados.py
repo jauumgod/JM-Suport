@@ -5,12 +5,14 @@ from ..models import tab_estoque
 class Chamados(db.Model):
     __tablename__ = 'tab_chamados'
     id = db.Column(db.Integer, primary_key=True)
-    nome_usr = db.Column(db.String(255), nullable=False)
     data_add = db.Column(db.String(255), nullable=False)
     data_fim = db.Column(db.String(255), nullable=False)
     titulo = db.Column(db.String(255), nullable=False)
     descricao = db.Column(db.String(255), nullable=False)
     tipo_ch = db.Column(db.String(255), nullable=False)
     situacao = db.Column(db.String(255), nullable=False)
-
+    telefone = db.Column(db.String(100))
+    usuarios_id = db.Column(db.Integer, db.ForeignKey('tab_chamados.id'))
+    
     tab_estoque_id = db.relationship('Estoque', backref='tab_chamados', lazy='dynamic')
+    

@@ -16,7 +16,13 @@
             <a class="nav-link active" aria-current="page" href="#">INICIO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Chamados</a>
+            {% if current_user == 'A' %}
+              <a class="nav-link" href="{{url_for('chamados_suporte_admin')}}">Chamados</a>
+            {% elif current_user == 'T' %}
+              <a class="nav-link" href="{{url_for('chamados_suporte')}}">Chamados</a>
+            {% else %}
+              <a class="nav-link" href="{{url_for('chamados_usuario')}}">Chamados</a>
+            {% endif %}
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,7 +30,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Chamados Fechados</a></li>
-              <li><a class="dropdown-item" href="#">Todos os Chamados</a></li>
+              <li><a class="dropdown-item" href="{{url_for('chamados_suporte')}}">Todos os Chamados</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Usuarios</a></li>
             </ul>
@@ -48,7 +54,6 @@
     <thead>
       <tr>
         <th scope="col">Nº</th>
-        <th scope="col">Nome</th>
         <th scope="col">Username</th>
         <th scope="col">Senha</th>
         <th scope="col">Permissão</th>
@@ -58,13 +63,12 @@
     <tbody>
       {% for user in users %}
       <tr>
-        <th scope="row">user.id</th>
-        <td>user.nome_usr</td>
-        <td>user.username</td>
-        <td>user.password</td>
-        <td>user.permiss</td>
-        <td>user.password</td>
-        <a href="#" class="btn btn-secondary btn-xs">Editar</a>
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.username}}</td>
+        <td><a href="">Alterar senha</a></td>
+        <td>{{user.permiss}}</td>
+        <td><a href="#" class="btn btn-secondary btn-xs">Editar</a></td>
+        
       </tr>
       {% endfor %}
     </tbody>
@@ -113,7 +117,6 @@ Pagina {{ users.page }} de {{ users.pages }}
 <div class="container_register">
   <form action="{{url_for('registrar')}}" method="post">
     <div>
-      <input type="text" placeholder="Nome" name="nome_usr"><br>
       <input type="text" placeholder="Username" name="username"><br>
       <input type="password" placeholder="*******" name="password"><br>
       <input type="email" placeholder="example@email.com" name="email"><br><br>

@@ -37,3 +37,11 @@ select.option{
     margin-left: 95%;
     top: 90%;
 }
+
+a{
+    text-decoration: none;   
+}
+
+th, tr{
+    text-align: center;
+}

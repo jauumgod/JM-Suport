@@ -12,12 +12,11 @@ import time
 def registrar():
     if request.method=='POST':
         user = User()
-        user.nome_usr = request.form['nome_usr']
         user.username = request.form['username']
         user.password = generate_password_hash(request.form['password'])
         user.email = request.form['email']
         user.permiss = 'N'
-        user.is_active = 'S'
+        user.active = 'S'
         query = User.query.filter_by(username=user.username).first()
 
         if query:
@@ -37,10 +36,13 @@ def usuarios_desativados():
     return render_template("login.html", usuarios=usuarios_desativados)
 
 
-@app.route("/atualizar_dados")
-def atualizar_dados():
-    
-    return 0
+@app.route("/atualizar_dados/<int:id>", methods=['GET', 'POST'])
+def atualizar_dados(id):
+    usuario = User.query.filter_by(id=id)
+    if request.method == 'post':
+        senha = request.form['senha']
+
+        
 
 
 

@@ -1,0 +1,8 @@
+select  username , titulo from tab_chamados inner join tab_usuarios tu  on chamados_id
+
+
+
+SELECT nome
+FROM clientes
+WHERE id_cliente = <id>;
+
