@@ -23,7 +23,7 @@
               <li><a class="dropdown-item" href="#">Suporte</a></li>
               <li><a class="dropdown-item" href="#">Sobre</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Sair</a></li>
+              <li><a class="dropdown-item" href="{{url_for('logout')}}">Sair</a></li>
             </ul>
           </li>
         </ul>
@@ -31,6 +31,10 @@
     </div>
 </nav>
 <br>
+{% if current_user.is_authenticated %}
+  Hi {{ current_user.name }}!
+{% endif %}
+
 <h1 align="center">DESCREVA O CHAMADO</h1><br>
 
 <header>

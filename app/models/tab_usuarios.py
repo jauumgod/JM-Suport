@@ -1,7 +1,7 @@
-from app import db
+from app import db, UserMixin
 
 
-class Usuarios(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'tab_usuarios'
     id = db.Column(db.Integer, primary_key=True)
     nome_usr = db.Column(db.String(100), nullable=False)
@@ -11,5 +11,6 @@ class Usuarios(db.Model):
     is_active = db.Column(db.String(10), nullable=False)
     permiss = db.Column(db.String(100), nullable=False)
 
-    def is_active(self):
-        return self.active
+
+    def __str__(self):
+        return self.name
