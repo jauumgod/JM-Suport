@@ -50,6 +50,7 @@
         <th scope="col">Descrição</th>
         <th scope="col">Tipo</th>
         <th scope="col">Situação</th>
+        <th scope="col">Usuario</th>
       </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -61,6 +62,7 @@
         <td>{{ch.descricao}}</td>
         <td>{{ch.tipo_ch}}</td>
         <td>{{ch.situacao}}</td>
+        <th>{{user}}</th>
       </tr>
       {% endfor %}
     </tbody>
@@ -76,7 +78,7 @@
     {% for page_num in chamados.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
 {% if page_num %}
 <!-- Check for the active page and set the link to "Active"-->
-            {% if cursos.page == page_num %}
+            {% if chamados.page == page_num %}
             <a href="{{ url_for('chamados_suporte', page=page_num) }}"
             class="btn btn-dark">
                 {{ page_num }}

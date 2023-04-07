@@ -8,6 +8,7 @@ from datetime import date
 import datetime
 import time
 
+ROWS_PER_PAGE = 7
 
 login_manager = LoginManager(app)
 
@@ -54,7 +55,7 @@ def login():
     
     return render_template("login.html", databases=databases)
 
-ROWS_PER_PAGE = 5
+
 @app.route("/chamados_suporte")
 @login_required
 def chamados_suporte():
@@ -62,45 +63,19 @@ def chamados_suporte():
     ch = Chamados.query.paginate(page=page, per_page=ROWS_PER_PAGE)
     return render_template("chamados_suporte.html", chamados = ch)
 
-
-ROWS_PER_PAGE = 5
 @app.route("/chamados_suporte_admin")
 @login_required
 def chamados_suporte_admin():
     page = request.args.get('page',1,type=int)
     ch = Chamados.query.paginate(page=page, per_page=ROWS_PER_PAGE)
-    return render_template("chamados_suporte_admin.html", chamados = ch)
-
-@app.route("/visualizar_chamados/<int:id>", methods=['GET', 'POST'])
-def visualizar_chamados(id):
-    views = Chamados.query.filter_by(id=id).first()
-    return render_template("visualizar_chamados.html", views=views)
-
-
-@app.route("/fechar_chamado", methods=['GET', 'POST'])
-@login_required
-def fechar_chamado():
-    situacao = 'fechado'
-    db.update(situacao)
-    db.commit()
-
-@app.route('/assumir_chamado', methods=['GET', 'POST'])
-@login_required
-def assumir_chamado():
-    if request.method=='post':
-        author=current_user
-        db.session.add(author)
-        db.session.commit()
-        flash('Chamado Assumido!')
-
-ROWS_PER_PAGE = 10
+    return render_template("chamados_suporte_admin.html", chamados = ch )
 
 @app.route("/chamados_usuario")
 @login_required
 def chamados_usuario():
     user = current_user.username
     page = request.args.get('page',1,type=int)
-    meus_chamados = Chamados.query.filter_by(tab_usuarios_id=current_user.id).paginate(page=page, per_page=ROWS_PER_PAGE)
+    meus_chamados = Chamados.query.filter_by(tab_usuarios_id=current_user.username).paginate(page=page, per_page=ROWS_PER_PAGE)
     return render_template("chamados_usuario.html", chamados = meus_chamados, user=user)
 
 
@@ -124,6 +99,32 @@ def abrir_chamado():
         
     return render_template("abrir_chamados.html")
 
+@login_required
+@app.route("/<int:id>/visualizar_chamados", methods=['GET', 'POST'])
+def visualizar_chamados(id):
+    query = Chamados.query.filter_by(id=id).all()
+    return render_template("visualizar_chamados.html", chamado=query)
+
+
+@app.route("/fechar_chamado", methods=['GET', 'POST'])
+@login_required
+def fechar_chamado():
+    situacao = 'fechado'
+    db.update(situacao)
+    db.commit()
+
+@app.route('/<int:id>/assumir_chamado', methods=['GET', 'POST'])
+@login_required
+def assumir_chamado(id):
+    if request.method=='post':
+        query = Chamados.query.filter_by(id=id).all()
+        author=current_user
+        ch = Chamados()
+        ch.situacao = 'Assumido por: ' + author
+        db.session.add(ch)
+        db.session.commit()
+        flash('Chamado Assumido!')
+        return redirect(url_for("<int:id>/visualizar_chamados"))
 @app.route("/espera")
 @login_required
 def chamados_espera():

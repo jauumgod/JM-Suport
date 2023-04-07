@@ -1,8 +1,25 @@
-select  username , titulo from tab_chamados inner join tab_usuarios tu  on chamados_id
+
+select  username from tab_chamados inner join tab_usuarios tu  on tab_usuarios_id 
+
+usuario = db.session.query(Usuario.username).join(Chamado, Chamado.tab_usuarios_id == Usuario.id).first()
 
 
+SELECT username
+FROM tab_chamados c
+INNER JOIN tab_usuarios u ON c.tab_usuarios_id = u.id
+WHERE u.id = '';
 
 SELECT nome
 FROM clientes
 WHERE id_cliente = <id>;
 
+1 - organizar, se o chamado ja tem dono, ninguem pode pegar
+2 - mover o chamado para o devido setor
+3 - aparecer apenas os chamados do setor especifico
+4 - opção de excluir o chamado
+5 - upload de imagens 
+6 - abrir tela do chamado, para responder o mesmo
+7 - dentro da tela de abertura do chamado, campo para exluir
+8 - Historico de modificações
+9 - Quem assumiu o chamado
+10 - Segurança

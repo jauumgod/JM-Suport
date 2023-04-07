@@ -32,8 +32,15 @@ def registrar():
 
 @app.route("/usuarios_desativados")
 def usuarios_desativados():
-    usuarios_desativados = User.query.filter_by(is_active="nao")
+    usuarios_desativados = User.query.filter_by(active="nao")
     return render_template("login.html", usuarios=usuarios_desativados)
+
+@app.route('/disable_user/<int:user_id>', methods=['POST'])
+def disable_user(user_id):
+    user = User.query.get_or_404(user_id)
+    user.active = 'N'
+    db.session.commit()
+    return 'User disabled'
 
 
 @app.route("/atualizar_dados/<int:id>", methods=['GET', 'POST'])
@@ -43,7 +50,12 @@ def atualizar_dados(id):
         senha = request.form['senha']
 
         
-
+@app.route('/delete_item/<int:item_id>', methods=['POST'])
+def delete_item(item_id):
+    item = Chamados.query.get_or_404(item_id)
+    db.session.delete(item)
+    db.session.commit()
+    return 'Chamado excluido'
 
 
 def tratar_lista(lista):

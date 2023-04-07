@@ -27,10 +27,33 @@
     </div>
 </nav>
 <div>
-    {% for view in views %}
-    <label>{{view.titulo}}</label>
-    <label>{{view.descricao}}</label>
-    {% endfor %}
-    <button class="btn btn-success">Fechar Chamado</button>
+   
+    <div class="container">
+      <div class="panel-heading">
+          <h3 class="panel-title">Chamado</h3>
+      </div><br>
+        <table class="table table-hover">
+        {% for view in chamado %}
+          <thead><tr><th colspan="4">TITULO: {{view.titulo}}</th></tr></thead>
+          <tbody>
+              <tr><td>DESCRICÃO: {{view.descricao}}</td></tr>
+              <tr><td>DATA ABERTURA: {{view.data_add}}</td></tr>
+              <tr><td>TIPO: {{view.tipo_ch}}</td></tr>
+              <tr><td>USUARIO: {{view.tab_usuarios_id}}</td></tr>
+              <tr><td>CIDADE: </td></tr>
+              <tr><td>Situação: {{view.situacao}}</td></tr>
+          </tbody>
+        {% endfor %}
+      </table>
+      <div class="form-control mb-3">
+        <a href="{{url_for('assumir_chamado')}}"><button class="btn btn-success">Assumir</button></a>
+      </div>
+
+      {%- for mensagem in get_flashed_messages() %}
+    <div class="alert alert-success" align="center">
+        {{mensagem}}
+    </div>
+      {% endfor %}
+    
 </div>
 {% endblock conteudo %}
