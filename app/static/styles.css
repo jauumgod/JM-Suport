@@ -1,15 +1,28 @@
 body{
-    border-bottom: 0;
+    margin: 0px;
 }
 .container-icons{
     text-align: center;
 
+}
+#div-select{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    border-radius: 8px;
+    font-size: larger;
+    width: 50%;
+}
+#input-group-text{
+    padding: 0 10px;
 }
 
 .form-control{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .select-box{

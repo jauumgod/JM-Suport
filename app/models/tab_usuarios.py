@@ -9,18 +9,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False)
     active = db.Column(db.String(10), nullable=False)
     permiss = db.Column(db.String(10), nullable=False)
+
+    tab_chamados_id = db.relationship('Chamados', backref='tab_chamados', lazy='dynamic')
+
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
     
-    chamados_id = db.relationship('User', backref='tab_usuarios', lazy='dynamic')
-
-    
-    def __str__(self):
-        return self.name
-
-    def is_authenticated(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return str(self.id)

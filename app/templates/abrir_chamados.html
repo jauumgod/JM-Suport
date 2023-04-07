@@ -33,36 +33,49 @@
 <br>
 <h1 align="center">DESCREVA O CHAMADO</h1><br>
 
-<header>
+<div class="container col-md-6">
     <form action="{{url_for('abrir_chamado')}}" class="form-control mb-3" method="POST">
         <p>TIPO DO PROBLEMA: </p>
-        <select name="select_type">
+
+        <div class="input-group mb-3" id="div-select">
+          <div class="input-group-prepend">
+            <label class="input-group-text" id = "options" for="inputGroupSelect01">Options</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01" name="select_type">
             <option value="AUTOMACAO">AUTOMAÇÃO</option>
             <option value="PDV">PDV</option>
             <option value="SERVIDOR">SERVIDOR</option>
             <option value="CAMERAS">CAMERAS</option>
         </select><br>
-        <div class="form-floating mb-2 col-4">
+        </div>
+        <div class="form-floating mb-2 col-md-6" >
             <input type="text" class="form-control" id="floatingInput" placeholder="Titulo" name="title">
             <label for="floatingInput">Titulo</label>
         </div>
 
-        <!-- <div class="form-floating mb-2 col-4">
-            <input type="text" class="form-control" id="floatingInput" placeholder="descricao" name="descricao">
-            <label for="floatingInput">Descrição</label>
-        </div> -->
-        <div class="form-floating mb-2">
+        <div class="form-floating mb-2 col-md-6">
           <textarea class="form-control" name="descricao" id="floatingTextarea" cols="80"></textarea>
           <label for="floatingTextarea">Descrição</label>
         </div>
-        <div class="form-floating mb-2 col-4">
+        <div class="form-floating mb-2 col-md-6">
           <input type="text" class="form-control" id="floatingInput" placeholder="telefone" name="telefone">
           <label for="floatingInput">Telefone de Contato</label>
+      </div>
+
+      <div class="input-group mb-3" id="div-select">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Options</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+          <option value="ti_infra">TI-INFRAESTRUTURA</option>
+          <option value="dir_operacoes">Diretoria de Operações</option>
+          <option value="cftv">CFTV - Cameras e Alarmes </option>
+        </select>
       </div>
 
         <div class="row col-2">
             <button class="btn btn-primary">Abrir</button>
         </div>  
     </form>
-</header>
+</div>
 {% endblock conteudo %}

@@ -12,7 +12,10 @@ class Chamados(db.Model):
     tipo_ch = db.Column(db.String(255), nullable=False)
     situacao = db.Column(db.String(255), nullable=False)
     telefone = db.Column(db.String(100))
-    usuarios_id = db.Column(db.Integer, db.ForeignKey('tab_chamados.id'))
+
+    tab_usuarios_id = db.Column(db.Integer, db.ForeignKey('tab_usuarios.id'))
     
     tab_estoque_id = db.relationship('Estoque', backref='tab_chamados', lazy='dynamic')
     
+    def __repr__(self):
+        return '<Chamados {}>'.format(self.descricao)
