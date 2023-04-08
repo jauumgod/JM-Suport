@@ -15,7 +15,7 @@ def registrar():
         user.username = request.form['username']
         user.password = generate_password_hash(request.form['password'])
         user.email = request.form['email']
-        user.permiss = 'N'
+        user.permiss = request.form['perm']
         user.active = 'S'
         query = User.query.filter_by(username=user.username).first()
 
@@ -39,6 +39,7 @@ def usuarios_desativados():
 def disable_user(user_id):
     user = User.query.get_or_404(user_id)
     user.active = 'N'
+    db.session.update(user)
     db.session.commit()
     return 'User disabled'
 

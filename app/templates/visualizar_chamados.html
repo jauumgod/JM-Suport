@@ -16,8 +16,17 @@
             <a class="nav-link active" aria-current="page" href="#">INICIO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('abrir_chamado')}}">ABRIR CHAMADO</a>
+            <a class="nav-link" href="{{url_for('abrir_chamado')}}">CHAMADOS ASSUMIDOS</a>
           </li>
+          {% if current_user.permission == 'A' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('chamados_suporte_admin')}}">VOLTAR</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('chamados_suporte')}}">VOLTAR</a>
+            </li>
+          {% endif %}
         </ul>
         <form class="d-flex" role="search" action="" method="post">
           <input class="form-control me-2" type="search" placeholder="Buscar Chamados" aria-label="Search">
@@ -27,7 +36,6 @@
     </div>
 </nav>
 <div>
-   
     <div class="container">
       <div class="panel-heading">
           <h3 class="panel-title">Chamado</h3>
@@ -42,13 +50,15 @@
               <tr><td>USUARIO: {{view.tab_usuarios_id}}</td></tr>
               <tr><td>CIDADE: </td></tr>
               <tr><td>Situação: {{view.situacao}}</td></tr>
+
           </tbody>
         {% endfor %}
       </table>
-      <div class="form-control mb-3">
-        <a href="{{url_for('assumir_chamado')}}"><button class="btn btn-success">Assumir</button></a>
-      </div>
-
+      {% for i in chamado %}
+        <div class="form-control mb-3">
+          <a href="{{url_for('assumir_chamado', id=i.id)}}"><button class="btn btn-success">Assumir</button></a>
+        </div>
+      {% endfor %}
       {%- for mensagem in get_flashed_messages() %}
     <div class="alert alert-success" align="center">
         {{mensagem}}

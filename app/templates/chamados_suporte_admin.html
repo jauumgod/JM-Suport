@@ -59,9 +59,9 @@
       <tr>
         <th scope="row">{{ch.id}}</th>
         <td><a href="{{url_for('visualizar_chamados', id=ch.id)}}">{{ch.titulo}}</a></td>
+        <td>{{ch.tipo_ch}}</td>
         <td>{{ch.data_add}}</td>
         <td>{{ch.descricao}}</td>
-        <td>{{ch.tipo_ch}}</td>
         <td>{{ch.situacao}}</td>
         <td>{{ch.tab_usuarios_id}}</td>
       </tr>

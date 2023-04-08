@@ -105,6 +105,11 @@ def visualizar_chamados(id):
     query = Chamados.query.filter_by(id=id).all()
     return render_template("visualizar_chamados.html", chamado=query)
 
+@login_required
+@app.route("/<int:id>/visualizar_chamados_usuario", methods=['GET', 'POST'])
+def visualizar_chamados_usuario(id):
+    query = Chamados.query.filter_by(id=id).all()
+    return render_template("visualizar_chamados_usuario.html", chamado=query)
 
 @app.route("/fechar_chamado", methods=['GET', 'POST'])
 @login_required
@@ -116,15 +121,14 @@ def fechar_chamado():
 @app.route('/<int:id>/assumir_chamado', methods=['GET', 'POST'])
 @login_required
 def assumir_chamado(id):
-    if request.method=='post':
-        query = Chamados.query.filter_by(id=id).all()
-        author=current_user
-        ch = Chamados()
-        ch.situacao = 'Assumido por: ' + author
-        db.session.add(ch)
+    chamado_assumido = Chamados.query.get(id)
+    if request.method=='POST':
+        author = current_user.username
+        chamado_assumido.situacao = 'Assumido por: ' + author
+        db.session.update(chamado_assumido)
         db.session.commit()
-        flash('Chamado Assumido!')
-        return redirect(url_for("<int:id>/visualizar_chamados"))
+
+
 @app.route("/espera")
 @login_required
 def chamados_espera():
