@@ -79,7 +79,7 @@ def chamados_usuario():
     return render_template("chamados_usuario.html", chamados = meus_chamados, user=user)
 
 
-@app.route("/abrir_chamados", methods=['GET','POST'])
+@app.route("/abrir_chamados/", methods=['GET','POST'])
 @login_required
 def abrir_chamado():
     if request.method == 'POST':
@@ -111,6 +111,22 @@ def visualizar_chamados_usuario(id):
     query = Chamados.query.filter_by(id=id).all()
     return render_template("visualizar_chamados_usuario.html", chamado=query)
 
+@login_required
+@app.route("/<int:id>/visualizar_contas", methods=['GET','POST'])
+def visualizar_contas(id):
+    conta = User.query.filter_by(id=id).all()
+    if request.method=='POST':
+        US = User()
+        alterar_senha = request.form (generate_password_hash['nova_senha'])
+        US.password = alterar_senha
+        conta.password(US)
+        db.session.add(conta)
+        db.session.commit()
+
+    return render_template("visualizar_contas.html", conta = conta)
+
+
+
 @app.route("/fechar_chamado", methods=['GET', 'POST'])
 @login_required
 def fechar_chamado():
@@ -136,10 +152,16 @@ def chamados_espera():
     if chamados:
         return render_template("chamados_espera.html", ch_espera = chamados)
 
+@app.route("/chamados_assumidos")
+def chamados_assumidos():
+    chamados = "Nenhum Chamado Assumido"
+    return render_template("chamados_assumidos.html", chamados=chamados)
+
 ROWS_PER_PAGE = 10
 @app.route("/gerenciar_contas")
 #@login_required
 def gerenciar_contas():
+
     page = request.args.get('page',1,type=int)
     users = User.query.paginate(page=page, per_page=ROWS_PER_PAGE)
     return render_template("gerenciar_contas.html", users=users)
