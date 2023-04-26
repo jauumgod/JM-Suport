@@ -172,3 +172,8 @@ def gerenciar_contas():
 def logout():
     logout_user()
     return redirect(url_for("login"))
+
+
+@app.route("/novo_modelo_form")
+def Novo_modelo_form():
+    return render_template("novo_modelo_form.html")

@@ -36,7 +36,7 @@
 <div class="square">
     <form action="{{url_for('abrir_chamado')}}" method="post">
         <div class="mb-2">
-            <label for="exampleFormControlInput1" class="form-label fw-bold">Escolha uma opção</label>
+            <label for="exampleFormControlInput1" class="form-label fw-bold">Escolha um topico</label>
             <select name="select_type">
                 <option value="AUTOMACAO">AUTOMAÇÃO</option>
                 <option value="PDV">PDV</option>
@@ -45,21 +45,25 @@
                 <option value="NOBREAKS">NOBREAKS</option>
             </select><br>
         </div>
-        <div class="mb-2">
-            <label for="exampleFormControlInput1" class="form-label fw-bold">Titulo do chamado:</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Titulo" name="title">
-        </div>
-        <div class="mb-2">
-            <label for="exampleFormControlInput1" class="form-label fw-bold">Telefone p/Contato:</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="(DDD)0000-0000" name="telefone">
-        </div>
-        <div class="mb-2">
-            <label for="exampleFormControlTextarea1" class="form-label fw-bold">Descrição do chamado:</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <div>
-          <input type="file" name="anexo">
-        </div><br>
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="form-label fw-bold">Titulo do chamado</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Titulo" name="title">
+            </div>
+            <div class="mb-2">
+                <label for="exampleFormControlInput1" class="form-label fw-bold">Telefone p/Contato</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="(DDD)0000-0000" name="telefone">
+            </div>
+            <div class="mb-2">
+                <label for="exampleFormControlTextarea1" class="form-label fw-bold">Descrição do chamado</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="mb-2">
+              <input type="checkbox" name="ti">TI-Infraestrutura
+              <input type="checkbox" name="ema">Diretoria de Operações(Engenharia)
+              <input type="checkbox" name="cftv">Cameras e Alarmes(CFTV)
+            </div>
+
+
         <button class="btn btn-success d-grid gap-2 col-6 mx-auto">Abrir chamado</button>
     </form>
 </div>

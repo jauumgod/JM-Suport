@@ -10,8 +10,5 @@ class User(db.Model, UserMixin):
     active = db.Column(db.String(10), nullable=False)
     permiss = db.Column(db.String(10), nullable=False)
 
-    tab_chamados_id = db.relationship('Chamados', backref='tab_chamados', lazy='dynamic')
 
-    def __repr__(self):
-        return '<User {}>'.format(self.username)
     

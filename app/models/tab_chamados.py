@@ -16,8 +16,4 @@ class Chamados(db.Model):
     setor = db.Column(db.String(100))
 
     tab_usuarios_id = db.Column(db.Integer, db.ForeignKey('tab_usuarios.id'))
-    
-    tab_estoque_id = db.relationship('Estoque', backref='tab_chamados', lazy='dynamic')
-    
-    def __repr__(self):
-        return '<Chamados {}>'.format(self.descricao)
+        
