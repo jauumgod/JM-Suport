@@ -174,6 +174,8 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/novo_modelo_form")
-def Novo_modelo_form():
-    return render_template("novo_modelo_form.html")
+
+
+@app.route("/meus_chamados")
+def meus_chamados():
+    return render_template("meus_chamados.html")

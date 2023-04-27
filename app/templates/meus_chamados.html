@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -16,7 +17,11 @@
             <a class="nav-link active" aria-current="page" href="#">INICIO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('meus_chamados')}}">CHAMADOS ASSUMIDOS</a>
+            {% if user == "A" %}
+                <a class="nav-link" href="{{url_for('chamados_suporte_admin')}}">TODOS OS CHAMADOS</a>
+            {% else %}
+                <a class="nav-link" href="{{url_for('chamados_suporte')}}">TODOS OS CHAMADOS</a>
+            {% endif %}
           </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url_for('chamados_usuario')}}">VOLTAR</a>
@@ -25,26 +30,6 @@
       </div>
     </div>
 </nav>
-<div>
-    <div class="container">
-      <div class="panel-heading">
-          <h3 class="panel-title">Chamado</h3>
-      </div><br>
-        <table class="table table-hover">
-        {% for view in chamado %}
-          <thead><tr><th colspan="4">TITULO: {{view.titulo}}</th></tr></thead>
-          <tbody>
-              <tr><td>DESCRICÃO: {{view.descricao}}</td></tr>
-              <tr><td>DATA ABERTURA: {{view.data_add}}</td></tr>
-              <tr><td>TIPO: {{view.tipo_ch}}</td></tr>
-              <tr><td>USUARIO: {{view.tab_usuarios_id}}</td></tr>
-              <tr><td>CIDADE: </td></tr>
-              <tr><td>Situação: {{view.situacao}}</td></tr>
-              <button class="btn btn-success">Assumir Chamado</button>
+<h2 align="center">MEUS CHAMADOS</h2>
 
-          </tbody>
-        {% endfor %}
-      </table>
-    
-</div>
 {% endblock conteudo %}

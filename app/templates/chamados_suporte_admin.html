@@ -42,7 +42,7 @@
 <h2 align="center">Chamados</h2>
 <br>
 <div>
-  <table class="table table-dark">
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">Nº</th>
@@ -68,7 +68,7 @@
       {% endfor %}
     </tbody>
   </table>
-  <hr>
+
   <div class="text-right">
     <a href="{{ url_for('chamados_suporte_admin', page=chamados.prev_num) }}"
     class="btn btn-outline-dark 
@@ -106,5 +106,4 @@ Pagina {{ chamados.page }} de {{ chamados.pages }}
 </div>
 </div>
 <br>
-<hr>
 {% endblock conteudo %}
