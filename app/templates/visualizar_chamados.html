@@ -38,27 +38,24 @@
 <div>
     <div class="container">
       <div class="panel-heading">
-          <h3 class="panel-title">Chamado</h3>
+          <h3 class="panel-title" align="center">Chamado</h3>
       </div><br>
-        <table class="table table-hover">
-        {% for view in chamado %}
-          <thead><tr><th colspan="4">TITULO: {{view.titulo}}</th></tr></thead>
-          <tbody>
-              <tr><td>DESCRICÃO: {{view.descricao}}</td></tr>
-              <tr><td>DATA ABERTURA: {{view.data_add}}</td></tr>
-              <tr><td>TIPO: {{view.tipo_ch}}</td></tr>
-              <tr><td>USUARIO: {{view.tab_usuarios_id}}</td></tr>
-              <tr><td>CIDADE: </td></tr>
-              <tr><td>Situação: {{view.situacao}}</td></tr>
-
-          </tbody>
-        {% endfor %}
-      </table>
-      {% for i in chamado %}
-        <div class="form-control mb-3">
-          <a href="{{url_for('assumir_chamado', id=i.id)}}"><button class="btn btn-success">Assumir</button></a>
-        </div>
+      {%for i in chamado %}
+        <form action="{{url_for('visualizar_chamados', id=i.id)}}" method="post">
       {% endfor %}
+        <div class="view_chamado">
+          {% for c in chamado%}
+          <label>TITULO: {{c.titulo}}</label><br>
+          <label>DATA ABERTURA: {{c.data_add}}</label><br>
+          <label>TIPO: {{c.tipo_ch}}</label><br>
+          <label>USUARIO: {{c.tab_usuarios_id}}</label><br>
+          <label>SITUAÇÃO: {{c.situacao}}</label><br>
+          <label>DESCRIÇÃO: {{c.descricao}}</label><br>
+          {%  endfor %}
+          <button class="btn btn-success">Assumir Chamado</button>
+        </div>
+      </form>
+
       {%- for mensagem in get_flashed_messages() %}
     <div class="alert alert-success" align="center">
         {{mensagem}}

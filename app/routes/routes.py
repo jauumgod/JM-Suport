@@ -7,6 +7,8 @@ from flask_login import login_manager, login_required, logout_user, login_user, 
 from datetime import date
 import datetime
 import time
+from flask import make_response
+
 
 ROWS_PER_PAGE = 7
 
@@ -102,8 +104,15 @@ def abrir_chamado():
 @login_required
 @app.route("/<int:id>/visualizar_chamados", methods=['GET', 'POST'])
 def visualizar_chamados(id):
-    query = Chamados.query.filter_by(id=id).all()
-    return render_template("visualizar_chamados.html", chamado=query)
+    chamado = Chamados.query.filter_by(id=id).all()
+    chamado_id = Chamados.query.filter_by(id=id).first()
+    if request.method=='POST':
+        ass_por = current_user.username
+        chamado_id.query.filter_by(id=id).update({"ass_por": ass_por})
+        db.session.commit()
+        return redirect(url_for("chamados_suporte"))
+
+    return render_template("visualizar_chamados.html", chamado=chamado)
 
 @login_required
 @app.route("/<int:id>/visualizar_chamados_usuario", methods=['GET', 'POST'])
@@ -134,16 +143,6 @@ def fechar_chamado():
     db.update(situacao)
     db.commit()
 
-@app.route('/<int:id>/assumir_chamado', methods=['GET', 'POST'])
-@login_required
-def assumir_chamado(id):
-    chamado_assumido = Chamados.query.get(id)
-    if request.method=='POST':
-        author = current_user.username
-        chamado_assumido.situacao = 'Assumido por: ' + author
-        db.session.update(chamado_assumido)
-        db.session.commit()
-
 
 @app.route("/espera")
 @login_required
@@ -172,7 +171,6 @@ def gerenciar_contas():
 def logout():
     logout_user()
     return redirect(url_for("login"))
-
 
 
 
