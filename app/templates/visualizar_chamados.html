@@ -52,7 +52,11 @@
           <label>SITUAÇÃO: {{c.situacao}}</label><br>
           <label>DESCRIÇÃO: {{c.descricao}}</label><br>
           {%  endfor %}
-          <button class="btn btn-success">Assumir Chamado</button>
+          {% for ch in chamado%}
+            {% if ch.ass_por == Null %}
+              <button class="btn btn-success">Assumir Chamado</button>
+            {% endif %}
+          {% endfor %}
         </div>
       </form>
 

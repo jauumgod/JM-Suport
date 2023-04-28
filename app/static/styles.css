@@ -69,3 +69,10 @@ th, tr{
     align-items: center;
 }
 
+
+.myCanvas{
+    display: block;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+}

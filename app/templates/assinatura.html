@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    
+    <h2 align="center">Assine aqui </h2>
+    <hr>
+
+<form action="{{url_for('assinatura')}}" method="POST">
+    <div >
+        <canvas class="myCanvas" id="myCanvas" width="350" height="300" name="assinatura" ></canvas>
+    </div>
+	<script>
+		var canvas = document.getElementById("myCanvas");
+		var ctx = canvas.getContext("2d");
+		var painting = false;
+		
+		canvas.addEventListener('mousedown', startPainting);
+		canvas.addEventListener('mouseup', stopPainting);
+		canvas.addEventListener('mousemove', draw);
+		
+		canvas.addEventListener('touchstart', function(e) {
+			startPainting(e.touches[0]);
+		});
+		canvas.addEventListener('touchend', stopPainting);
+		canvas.addEventListener('touchmove', function(e) {
+			draw(e.touches[0]);
+			e.preventDefault();
+		});
+		
+		function startPainting(e) {
+			painting = true;
+			draw(e);
+		}
+		
+		function stopPainting() {
+			painting = false;
+			ctx.beginPath();
+		}
+		
+		function draw(e) {
+			if (!painting) return;
+			ctx.lineWidth = 5;
+			ctx.lineCap = 'round';
+			ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+			ctx.stroke();
+			ctx.beginPath();
+			ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+		}
+	</script>
+    <br>
+    <hr>
+    <div align="center">
+        <a href=""><button class="btn btn-danger row col-6 mb-3" style="width:15%; padding: 5px; padding-left: 3px;">Limpar</button></a>
+        <button class="btn btn-success row col-6 mb-3" style="width:15%; padding: 5px; margin-left: 20px;" >Salvar</button>
+    </div>
+
+</form>
+    
+{% endblock conteudo %}

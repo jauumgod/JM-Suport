@@ -173,6 +173,11 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/assinatura", methods=['GET', 'POST'])
+def assinatura():
+    
+    return render_template("assinatura.html")
+
 
 @app.route("/meus_chamados")
 def meus_chamados():
