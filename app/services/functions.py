@@ -1,8 +1,20 @@
-from ..models.tab_usuarios import User
+from app import app
 
 
-def buscar_usuario(id):
-    id = id
-    select = User.query.filter_by(id=id).first()
-    id = select
-    return id
+@app.route("/cadastrar_item", methods=['POST'])
+def cadastrar_item():
+    pass
+
+@app.route("/ver_items")
+def ver_items():
+    pass
+
+@app.route("/<int:id>/atualizar_item", methods=['POST'])
+def atualizar_item(id):
+    pass
+
+@app.route("/<int:id>/remover_item", methods=['POST'])
+def remover_item(id):
+    pass
+
+

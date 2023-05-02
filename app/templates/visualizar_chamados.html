@@ -60,6 +60,19 @@
         </div>
       </form>
 
+      <form action="" method="post">
+        {% for ch in chamado%}
+          {% if ch.ass_por != Null %}
+          <label>Itens Utilizados</label>
+          <select name="select_item_utilizado">
+            {% for item in items %}
+              <option value="{{item.nome}}">{{item.nome}}</option>
+            {% endfor %}
+        </select>
+          {%endif%}
+        {% endfor %} 
+      </form>
+
       {%- for mensagem in get_flashed_messages() %}
     <div class="alert alert-success" align="center">
         {{mensagem}}

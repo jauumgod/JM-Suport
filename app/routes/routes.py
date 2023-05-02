@@ -104,6 +104,7 @@ def abrir_chamado():
 @login_required
 @app.route("/<int:id>/visualizar_chamados", methods=['GET', 'POST'])
 def visualizar_chamados(id):
+    items = Estoque.query.all()
     chamado = Chamados.query.filter_by(id=id).all()
     chamado_id = Chamados.query.filter_by(id=id).first()
     if request.method=='POST':
@@ -112,7 +113,7 @@ def visualizar_chamados(id):
         db.session.commit()
         return redirect(url_for("chamados_suporte"))
 
-    return render_template("visualizar_chamados.html", chamado=chamado)
+    return render_template("visualizar_chamados.html", chamado=chamado, items= items)
 
 @login_required
 @app.route("/<int:id>/visualizar_chamados_usuario", methods=['GET', 'POST'])
@@ -174,8 +175,7 @@ def logout():
 
 
 @app.route("/assinatura", methods=['GET', 'POST'])
-def assinatura():
-    
+def assinatura():    
     return render_template("assinatura.html")
 
 
