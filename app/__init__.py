@@ -23,3 +23,4 @@ from .models import tab_chamados, tab_estoque, tab_usuarios
 from .routes import routes, routes_crud, routes_estoque
 
 
+ 
