@@ -25,6 +25,10 @@ def load_user(user_id):
 def pagina_inicial():
     return render_template("pagina_inicial.html")
 
+@app.route("/new_login")
+def new_login():
+    return render_template("new_login_page.html")
+
 @app.route('/profile')
 def profile():
     if current_user.is_authenticated:
@@ -55,7 +59,7 @@ def login():
         else:
             return redirect(url_for("chamados_usuario"))
     
-    return render_template("login.html", databases=databases)
+    return render_template("login_.html", databases=databases)
 
 
 @app.route("/chamados_suporte")
