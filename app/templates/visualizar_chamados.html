@@ -58,17 +58,24 @@
             {% endif %}
           {% endfor %}
         </div>
+        <div>
+          {% for ch in chamado%}
+          {% if ch.ass_por != Null %}
+            <button class="btn btn-danger row col-2">Fechar Chamado</button>
+          {% endif %}
+        {% endfor %}
+        </div>
       </form>
 
       <form action="" method="post">
         {% for ch in chamado%}
           {% if ch.ass_por != Null %}
           <label>Itens Utilizados</label>
-          <select name="select_item_utilizado">
-            {% for item in items %}
-              <option value="{{item.nome}}">{{item.nome}}</option>
-            {% endfor %}
-        </select>
+            <select name="select_item_utilizado">
+              {% for item in items %}
+                <option value="{{item.nome}}">{{item.nome}}</option>
+              {% endfor %}
+            </select>
           {%endif%}
         {% endfor %} 
       </form>
@@ -78,6 +85,7 @@
         {{mensagem}}
     </div>
       {% endfor %}
+    
     
 </div>
 {% endblock conteudo %}

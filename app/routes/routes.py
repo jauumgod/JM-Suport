@@ -7,7 +7,6 @@ from flask_login import login_manager, login_required, logout_user, login_user, 
 from datetime import date
 import datetime
 import time
-from flask import make_response
 
 
 ROWS_PER_PAGE = 7
@@ -25,9 +24,6 @@ def load_user(user_id):
 def pagina_inicial():
     return render_template("pagina_inicial.html")
 
-@app.route("/new_login")
-def new_login():
-    return render_template("new_login_page.html")
 
 @app.route('/profile')
 def profile():
@@ -141,12 +137,12 @@ def visualizar_contas(id):
 
 
 
-@app.route("/fechar_chamado", methods=['GET', 'POST'])
+@app.route("/<int:id>/fechar_chamado", methods=['GET', 'POST'])
 @login_required
-def fechar_chamado():
-    situacao = 'fechado'
-    db.update(situacao)
-    db.commit()
+def fechar_chamados(id):
+    chamado = Chamados.query.filter_by(id=id).all()
+    chamado_id = Chamados.query.filter_by(id=id).first()
+    return render_template("fechar_chamados.html", chamado = chamado, chamado_id=chamado_id)
 
 
 @app.route("/espera")

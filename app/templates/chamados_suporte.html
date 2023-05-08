@@ -58,7 +58,12 @@
       {% for ch in chamados %}
       <tr>
         <th scope="row">{{ch.id}}</th>
-        <td><a href="{{url_for('visualizar_chamados', id=ch.id)}}">{{ch.titulo}}</a></td>
+        {% if ch.ass_por == Null %}
+          <td><a href="{{url_for('visualizar_chamados', id=ch.id)}}">{{ch.titulo}}</a></td>
+        {% else %}
+          <td><a href="{{url_for('fechar_chamados', id=ch.id)}}">{{ch.titulo}}</a></td>
+        {% endif %}
+        
         <td>{{ch.data_add}}</td>
         <td>{{ch.descricao}}</td>
         <td>{{ch.tipo_ch}}</td>

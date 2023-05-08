@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+      </svg></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">INICIO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('chamados_assumidos')}}">CHAMADOS ASSUMIDOS</a>
+          </li>
+          {% if current_user.permission == 'A' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('chamados_suporte_admin')}}">VOLTAR</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('chamados_suporte')}}">VOLTAR</a>
+            </li>
+          {% endif %}
+        </ul>
+        <form class="d-flex" role="search" action="" method="post">
+          <input class="form-control me-2" type="search" placeholder="Buscar Chamados" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+</nav>
+<div>
+    <div class="container">
+      <div class="panel-heading">
+          <h3 class="panel-title" align="center">Chamado</h3>
+      </div><br>
+      {%for i in chamado %}
+        <form action="{{url_for('visualizar_chamados', id=i.id)}}" method="post">
+      {% endfor %}
+        <div class="view_chamado">
+          {% for c in chamado%}
+          <label>TITULO: {{c.titulo}}</label><br>
+          <label>DATA ABERTURA: {{c.data_add}}</label><br>
+          <label>TIPO: {{c.tipo_ch}}</label><br>
+          <label>USUARIO: {{c.tab_usuarios_id}}</label><br>
+          <label>SITUAÇÃO: {{c.situacao}}</label><br>
+          <label>DESCRIÇÃO: {{c.descricao}}</label><br>
+          {%  endfor %}
+          {% for ch in chamado%}
+            {% if ch.ass_por == Null %}
+              <button class="btn btn-success">Assumir Chamado</button>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div>
+          {% for ch in chamado%}
+          {% if ch.ass_por != Null %}
+            <button class="btn btn-danger row col-2">Fechar Chamado</button>
+          {% endif %}
+        {% endfor %}
+        </div>
+      </form>
+
+      <form action="" method="post">
+        {% for ch in chamado%}
+          {% if ch.ass_por != Null %}
+          <label>Itens Utilizados</label>
+            <select name="select_item_utilizado">
+              {% for item in items %}
+                <option value="{{item.nome}}">{{item.nome}}</option>
+              {% endfor %}
+            </select>
+          {%endif%}
+        {% endfor %} 
+      </form>
+
+      {%- for mensagem in get_flashed_messages() %}
+    <div class="alert alert-success" align="center">
+        {{mensagem}}
+    </div>
+      {% endfor %}
+    
+    
+</div>
+{% endblock conteudo %}
