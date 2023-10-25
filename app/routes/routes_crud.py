@@ -74,3 +74,25 @@ def tratar_lista(lista):
 #         is_active= 'nao'
 #         db.update(is_active)
 #         db.commit()
+
+@app.route("/buscar", methods=['GET', 'POST'])
+def buscar_chamado():
+
+    chamados = Chamados.query.all()
+
+    if request.method == 'POST':
+        valor = request.form['busca']
+        flash("campo de busca vazio!")
+        return render_template("erros/not_found.html")
+    
+
+    busca = valor
+    for i, j in chamados.items():
+        if busca == i:
+            return render_template("search_page.html", result = i, name = valor)
+
+        
+    else:
+        flash("O link desejado não foi encontrado")
+        return render_template("erros/not_found.html")
+    

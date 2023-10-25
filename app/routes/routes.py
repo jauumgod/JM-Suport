@@ -22,14 +22,14 @@ def load_user(user_id):
 
 @app.route("/")
 def pagina_inicial():
-    return render_template("pagina_inicial.html")
+    return render_template("routes/pagina_inicial.html")
 
 
 @app.route('/profile')
 def profile():
     if current_user.is_authenticated:
         user = current_user.username
-        return render_template('profile.html', user=user)
+        return render_template('config/profile.html', user=user)
     else:
         return redirect(url_for('login'))
 
@@ -49,13 +49,13 @@ def login():
         login_user(user, duration=datetime.timedelta(days=1))
 
         if user.permiss == 'A':
-            return redirect(url_for("chamados_suporte_admin"))
+            return redirect(url_for("routes/chamados_suporte_admin"))
         elif user.permiss == 'T':
-            return redirect(url_for("chamados_suporte"))
+            return redirect(url_for("routes/chamados_suporte"))
         else:
-            return redirect(url_for("chamados_usuario"))
+            return redirect(url_for("routes/chamados_usuario"))
     
-    return render_template("login_.html", databases=databases)
+    return render_template("auth/login_.html", databases=databases)
 
 
 @app.route("/chamados_suporte")
@@ -63,14 +63,14 @@ def login():
 def chamados_suporte():
     page = request.args.get('page',1,type=int)
     ch = Chamados.query.paginate(page=page, per_page=ROWS_PER_PAGE)
-    return render_template("chamados_suporte.html", chamados = ch)
+    return render_template("routes/chamados_suporte.html", chamados = ch)
 
 @app.route("/chamados_suporte_admin")
 @login_required
 def chamados_suporte_admin():
     page = request.args.get('page',1,type=int)
     ch = Chamados.query.paginate(page=page, per_page=ROWS_PER_PAGE)
-    return render_template("chamados_suporte_admin.html", chamados = ch )
+    return render_template("routes/chamados_suporte_admin.html", chamados = ch )
 
 @app.route("/chamados_usuario")
 @login_required
@@ -78,7 +78,7 @@ def chamados_usuario():
     user = current_user.username
     page = request.args.get('page',1,type=int)
     meus_chamados = Chamados.query.filter_by(tab_usuarios_id=current_user.username).paginate(page=page, per_page=ROWS_PER_PAGE)
-    return render_template("chamados_usuario.html", chamados = meus_chamados, user=user)
+    return render_template("routes/chamados_usuario.html", chamados = meus_chamados, user=user)
 
 
 @app.route("/abrir_chamados/", methods=['GET','POST'])
@@ -97,9 +97,9 @@ def abrir_chamado():
         ch.tab_usuarios_id = user
         db.session.add(ch)
         db.session.commit()
-        return redirect(url_for("chamados_usuario"))
+        return redirect(url_for("routes/chamados_usuario"))
         
-    return render_template("abrir_chamados.html")
+    return render_template("routes/abrir_chamados.html")
 
 @login_required
 @app.route("/<int:id>/visualizar_chamados", methods=['GET', 'POST'])
@@ -111,15 +111,15 @@ def visualizar_chamados(id):
         ass_por = current_user.username
         chamado_id.query.filter_by(id=id).update({"ass_por": ass_por})
         db.session.commit()
-        return redirect(url_for("chamados_suporte"))
+        return redirect(url_for("routes/chamados_suporte"))
 
-    return render_template("visualizar_chamados.html", chamado=chamado, items= items)
+    return render_template("routes/visualizar_chamados.html", chamado=chamado, items= items)
 
 @login_required
 @app.route("/<int:id>/visualizar_chamados_usuario", methods=['GET', 'POST'])
 def visualizar_chamados_usuario(id):
     query = Chamados.query.filter_by(id=id).all()
-    return render_template("visualizar_chamados_usuario.html", chamado=query)
+    return render_template("routes/visualizar_chamados_usuario.html", chamado=query)
 
 @login_required
 @app.route("/<int:id>/visualizar_contas", methods=['GET','POST'])
@@ -133,7 +133,7 @@ def visualizar_contas(id):
         db.session.add(conta)
         db.session.commit()
 
-    return render_template("visualizar_contas.html", conta = conta)
+    return render_template("routes/visualizar_contas.html", conta = conta)
 
 
 
@@ -142,7 +142,7 @@ def visualizar_contas(id):
 def fechar_chamados(id):
     chamado = Chamados.query.filter_by(id=id).all()
     chamado_id = Chamados.query.filter_by(id=id).first()
-    return render_template("fechar_chamados.html", chamado = chamado, chamado_id=chamado_id)
+    return render_template("routes/fechar_chamados.html", chamado = chamado, chamado_id=chamado_id)
 
 
 @app.route("/espera")
@@ -150,12 +150,12 @@ def fechar_chamados(id):
 def chamados_espera():
     chamados = Chamados.query.filter_by(situacao='processamento')
     if chamados:
-        return render_template("chamados_espera.html", ch_espera = chamados)
+        return render_template("routes/chamados_espera.html", ch_espera = chamados)
 
 @app.route("/chamados_assumidos")
 def chamados_assumidos():
     chamados = "Nenhum Chamado Assumido"
-    return render_template("chamados_assumidos.html", chamados=chamados)
+    return render_template("routes/chamados_assumidos.html", chamados=chamados)
 
 ROWS_PER_PAGE = 10
 @app.route("/gerenciar_contas")
@@ -164,7 +164,7 @@ def gerenciar_contas():
 
     page = request.args.get('page',1,type=int)
     users = User.query.paginate(page=page, per_page=ROWS_PER_PAGE)
-    return render_template("gerenciar_contas.html", users=users)
+    return render_template("config/gerenciar_contas.html", users=users)
 
 
 @login_required
@@ -176,9 +176,9 @@ def logout():
 
 @app.route("/assinatura", methods=['GET', 'POST'])
 def assinatura():    
-    return render_template("assinatura.html")
+    return render_template("auth/assinatura.html")
 
 
 @app.route("/meus_chamados")
 def meus_chamados():
-    return render_template("meus_chamados.html")
+    return render_template("routes/meus_chamados.html")
