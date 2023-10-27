@@ -18,17 +18,17 @@
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('abrir_chamado')}}">ABRIR CHAMADO</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              CONFIGURAÇÕES
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Alterar Senha</a></li>
-              <li><a class="dropdown-item" href="{{url_for('gerenciar_contas')}}">Gerenciar Contas</a></li>
-              <li><a class="dropdown-item" href="">Chamados Fechados</a></li>
-              <li><hr class="dropdown-divider">Versão 1.0.1</li>
-              <li><a class="dropdown-item" href="{{url_for('logout')}}">Sair</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('abrir_chamado')}}">CHAMADOS FECHADOS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('gerenciar_contas')}}">CONFIGURAÇÕES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('relatorios')}}">RELATORIOS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('logout')}}">SAIR</a>
           </li>
         </ul>
         <form class="d-flex" role="search" action="" method="post">

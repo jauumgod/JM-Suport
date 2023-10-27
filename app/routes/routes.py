@@ -1,12 +1,9 @@
-from app import app, render_template, url_for, request, redirect, flash, db
-from werkzeug.security import generate_password_hash, check_password_hash
+from app import app, check_password_hash, generate_password_hash, render_template, url_for, request, redirect, flash, db, time, datetime, date,login_manager, login_required, logout_user, login_user, LoginManager, current_user
 from ..models.tab_usuarios import User
 from ..models.tab_chamados import Chamados
 from ..models.tab_estoque import Estoque
-from flask_login import login_manager, login_required, logout_user, login_user, LoginManager, current_user
-from datetime import date
-import datetime
-import time
+
+
 
 
 ROWS_PER_PAGE = 7
@@ -35,10 +32,9 @@ def profile():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    databases = ['kurujao', 'lenovo']
     if request.method == "POST":
-        usuario = request.form['user']
-        senha = request.form['pass']
+        usuario = request.form['usuario']
+        senha = request.form['senha']
 
         user = User.query.filter_by(username=usuario).first()
 
@@ -49,13 +45,13 @@ def login():
         login_user(user, duration=datetime.timedelta(days=1))
 
         if user.permiss == 'A':
-            return redirect(url_for("routes/chamados_suporte_admin"))
+            return redirect(url_for("chamados_suporte_admin"))
         elif user.permiss == 'T':
-            return redirect(url_for("routes/chamados_suporte"))
+            return redirect(url_for("chamados_suporte"))
         else:
-            return redirect(url_for("routes/chamados_usuario"))
+            return redirect(url_for("chamados_usuario"))
     
-    return render_template("auth/login_.html", databases=databases)
+    return render_template("auth/login_.html")
 
 
 @app.route("/chamados_suporte")
@@ -97,7 +93,7 @@ def abrir_chamado():
         ch.tab_usuarios_id = user
         db.session.add(ch)
         db.session.commit()
-        return redirect(url_for("routes/chamados_usuario"))
+        return redirect(url_for("chamados_usuario"))
         
     return render_template("routes/abrir_chamados.html")
 
@@ -111,7 +107,7 @@ def visualizar_chamados(id):
         ass_por = current_user.username
         chamado_id.query.filter_by(id=id).update({"ass_por": ass_por})
         db.session.commit()
-        return redirect(url_for("routes/chamados_suporte"))
+        return redirect(url_for("chamados_suporte"))
 
     return render_template("routes/visualizar_chamados.html", chamado=chamado, items= items)
 
@@ -157,7 +153,7 @@ def chamados_assumidos():
     chamados = "Nenhum Chamado Assumido"
     return render_template("routes/chamados_assumidos.html", chamados=chamados)
 
-ROWS_PER_PAGE = 10
+
 @app.route("/gerenciar_contas")
 #@login_required
 def gerenciar_contas():
@@ -182,3 +178,10 @@ def assinatura():
 @app.route("/meus_chamados")
 def meus_chamados():
     return render_template("routes/meus_chamados.html")
+
+
+
+@app.route("/relatorios")
+def relatorios():
+
+    return render_template("relatorios/relatorios.html")

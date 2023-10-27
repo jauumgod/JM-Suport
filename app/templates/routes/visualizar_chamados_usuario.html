@@ -27,26 +27,18 @@
 </nav>
 <div>
     <div class="container">
-      <div class="panel-heading">
-          <h3 class="panel-title">Chamado</h3>
-      </div><br>
-
-      <div>
-        <label>Titulo: chamado.titulo</label>
-      </div>
-
-
+      <br>
         <table class="table table-hover">
         {% for view in chamado %}
-          <thead><tr><th colspan="4">TITULO: {{view.titulo}}</th></tr></thead>
-          <tbody>
+          <h2> Chamado: {{view.titulo}}</h2><br>
+          <thead></thead>
               <tr><td>DESCRICÃO: {{view.descricao}}</td></tr>
               <tr><td>DATA ABERTURA: {{view.data_add}}</td></tr>
               <tr><td>TIPO: {{view.tipo_ch}}</td></tr>
               <tr><td>USUARIO: {{view.tab_usuarios_id}}</td></tr>
               <tr><td>CIDADE: </td></tr>
               <tr><td>Situação: {{view.situacao}}</td></tr>
-              <button class="btn btn-success">Assumir Chamado</button>
+              <button class="btn btn-success"><a style="color: white;" href="#">Assumir Chamado</a></button><br>
 
           </tbody>
         {% endfor %}

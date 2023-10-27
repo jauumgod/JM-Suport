@@ -1,0 +1,18 @@
+
+
+
+h1{
+    font-size: 24;
+}
+
+
+
+article{
+    margin: 100px;
+    background-color: rgb(190, 190, 190);
+    border-radius: 6px;
+}
+p{
+    font-size: 16px;
+    line-height: 1.6;
+}
