@@ -2,8 +2,7 @@ from app import app, check_password_hash, generate_password_hash, render_templat
 from ..models.tab_usuarios import User
 from ..models.tab_chamados import Chamados
 from ..models.tab_estoque import Estoque
-
-
+import datetime
 
 
 ROWS_PER_PAGE = 7
