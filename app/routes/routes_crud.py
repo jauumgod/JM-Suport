@@ -1,10 +1,8 @@
-from app import app, render_template, url_for, request, redirect, flash, db, session
-from werkzeug.security import generate_password_hash, check_password_hash
+from app import app, time, generate_password_hash, check_password_hash, render_template, url_for, request, redirect, flash, db, session,login_manager, login_required, logout_user
 from ..models.tab_usuarios import User
 from ..models.tab_chamados import Chamados
-from ..models.tab_estoque import Estoque
-from flask_login import login_manager, login_required, logout_user
-import time
+from ..models.tab_estoque import Estoque 
+
 
 
 
